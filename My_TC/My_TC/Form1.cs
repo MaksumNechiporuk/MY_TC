@@ -19,6 +19,7 @@ namespace MyTC
         ToolStripMenuItem RenameMenuItem;
         ToolStripMenuItem DeleteMenuItem;
         ToolStripMenuItem ViewMenuItem;
+
         ToolStripMenuItem СutMenuItem;
         ToolStripMenuItem Creat;
         ToolStripMenuItem[] items;
