@@ -36,21 +36,24 @@ namespace MyTC
             RenameMenuItem = new ToolStripMenuItem("Переименовать");
             DeleteMenuItem = new ToolStripMenuItem("Удалить");
             ViewMenuItem = new ToolStripMenuItem("Вид");
-           ToolStripMenuItem[] ContextMenu = new[] { TableToolStripMenuItem, ListToolStripMenuItem, TilesToolStripMenuItem, ListImgToolStripMenuItem, ListIconToolStripMenuItem };
-           // ViewMenuItem.DropDownItems.AddRange(ContextMenu);
+
+            ViewToolStripMenuItem.DropDownItems.Add(ListIconToolStripMenuItem);
+
+            ViewMenuItem.DropDownItems.AddRange(new[] { TableToolStripMenuItem,
+            ListToolStripMenuItem, TilesToolStripMenuItem, ListImgToolStripMenuItem, ListIconToolStripMenuItem });
+
 
             copyMenuItem.Enabled = false;
             RenameMenuItem.Enabled = false;
             DeleteMenuItem.Enabled = false;
 
-
-            contextMenuStrip1.Items.AddRange(new[] { ViewMenuItem,copyMenuItem, pasteMenuItem, RenameMenuItem , DeleteMenuItem });
+            contextMenuStrip1.Items.AddRange(new[] { ViewMenuItem, copyMenuItem, pasteMenuItem, RenameMenuItem, DeleteMenuItem });
             copyMenuItem.Click += CopyMenuItem_Click;
             pasteMenuItem.Click += PasteMenuItem_Click;
             RenameMenuItem.Click += RenameMenuItem_Click;
             DeleteMenuItem.Click += DeleteMenuItem_Click;
             pasteMenuItem.Enabled = false;
-             ColumnHeader c = new ColumnHeader();
+            ColumnHeader c = new ColumnHeader();
             c.Text = "Имя";
             c.Width = c.Width + 80;
             ColumnHeader c2 = new ColumnHeader();
@@ -108,14 +111,14 @@ namespace MyTC
             if (DialogResult.Yes == MessageBox.Show("Удалить " + listView1.SelectedItems[0].Text + "?", "Удаление", MessageBoxButtons.YesNo))
 
                 if (attr.HasFlag(FileAttributes.Directory))
-            {
+                {
                     DeleteDirectory(@listView1.SelectedItems[0].Name);
                 }
                 else
-            {
+                {
 
                     File.Delete(@listView1.SelectedItems[0].Name);
-            }
+                }
 
 
             LoadListView();
@@ -143,7 +146,7 @@ namespace MyTC
             }
         }
 
-       
+
         private void RenameMenuItem_Click(object sender, EventArgs e)
         {
             if (listView1.SelectedItems.Count > 0)
@@ -151,7 +154,7 @@ namespace MyTC
                 oldName = @listView1.SelectedItems[0].Name;
                 listView1.SelectedItems[0].BeginEdit();
             }
-             
+
         }
 
         private void PasteMenuItem_Click(object sender, EventArgs e)
@@ -176,7 +179,7 @@ namespace MyTC
                 strCopy = @listView1.SelectedItems[0].Name;
                 pasteMenuItem.Enabled = true;
             }
-           
+
         }
 
         private void ClickOnColumn(object sender, ColumnClickEventArgs e)
@@ -653,7 +656,7 @@ namespace MyTC
                         {
                             f = new FileInfo(@s2);
                             t = s2.Substring(s2.LastIndexOf('\\') + 1);
-                            lw = new ListViewItem(new string[] { t },0);
+                            lw = new ListViewItem(new string[] { t }, 0);
                             lw.Name = s2;
                             listView1.Items.Add(lw);
                         }
@@ -722,10 +725,11 @@ namespace MyTC
                     lw = new ListViewItem(new string[] { t }, 1);
                     lw.Name = s2;
                     listView1.Items.Add(lw);
+
                 }
             }
         }
-    
+
         public void listView1_AfterLabelEdit(object sender, LabelEditEventArgs e)
         {
             FileAttributes attr = File.GetAttributes(@oldName);
@@ -740,7 +744,8 @@ namespace MyTC
                 string n = oldName.Substring(oldName.LastIndexOf('.') + 1);
                 File.Move(@oldName, @path + e.Label.ToString() + '.' + n);
             }
-                LoadListView();
+           // LoadListView();
+           // обновитиToolStripMenuItem_Click(sender, e);
         }
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -755,6 +760,62 @@ namespace MyTC
                 copyMenuItem.Enabled = false;
                 RenameMenuItem.Enabled = false;
                 DeleteMenuItem.Enabled = false;
+            }
+        }
+
+        private void видToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ViewToolStripMenuItem.DropDownItems.Clear();
+            ViewToolStripMenuItem.DropDownItems.AddRange(new[] { TableToolStripMenuItem,
+            ListToolStripMenuItem, TilesToolStripMenuItem, ListImgToolStripMenuItem, ListIconToolStripMenuItem });
+
+            ViewToolStripMenuItem.DropDownItems.Add(new ToolStripSeparator());
+            ViewToolStripMenuItem.DropDownItems.Add(ReloadToolStripMenuItem);
+
+        }
+
+        private void contextMenuStrip1_BeginDrag(object sender, EventArgs e)
+        {
+            ViewMenuItem.DropDownItems.AddRange(new[] { TableToolStripMenuItem,
+            ListToolStripMenuItem, TilesToolStripMenuItem, ListImgToolStripMenuItem, ListIconToolStripMenuItem });
+
+        }
+
+        private void listView1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                //MessageBox.Show("asd");
+             //   LoadListView();
+
+            }
+        }
+
+        private void listView1_MouseClick(object sender, MouseEventArgs e)
+        {
+
+            {
+
+            }
+        }
+
+        private void listView1_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+               // MessageBox.Show("asd");
+                LoadListView();
+
+            }
+        }
+
+        private void listView1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                Thread.Sleep(100);
+               // MessageBox.Show("asd");
+               // LoadListView();
             }
         }
     }

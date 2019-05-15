@@ -33,14 +33,14 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.закритьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.видToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ListIconToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ListImgToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
-            this.обновитиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ReloadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
@@ -61,7 +61,7 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.файлToolStripMenuItem,
-            this.видToolStripMenuItem});
+            this.ViewToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 24);
@@ -83,20 +83,21 @@
             this.закритьToolStripMenuItem.Text = "Закрить";
             this.закритьToolStripMenuItem.Click += new System.EventHandler(this.закритьToolStripMenuItem_Click);
             // 
-            // видToolStripMenuItem
+            // ViewToolStripMenuItem
             // 
-            this.видToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
-            this.видToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ViewToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
+            this.ViewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ListIconToolStripMenuItem,
             this.ListImgToolStripMenuItem,
             this.TilesToolStripMenuItem,
             this.ListToolStripMenuItem,
             this.TableToolStripMenuItem,
             this.toolStripMenuItem2,
-            this.обновитиToolStripMenuItem});
-            this.видToolStripMenuItem.Name = "видToolStripMenuItem";
-            this.видToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
-            this.видToolStripMenuItem.Text = "Вид";
+            this.ReloadToolStripMenuItem});
+            this.ViewToolStripMenuItem.Name = "ViewToolStripMenuItem";
+            this.ViewToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
+            this.ViewToolStripMenuItem.Text = "Вид";
+            this.ViewToolStripMenuItem.Click += new System.EventHandler(this.видToolStripMenuItem_Click);
             // 
             // ListIconToolStripMenuItem
             // 
@@ -143,12 +144,12 @@
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
             this.toolStripMenuItem2.Size = new System.Drawing.Size(177, 6);
             // 
-            // обновитиToolStripMenuItem
+            // ReloadToolStripMenuItem
             // 
-            this.обновитиToolStripMenuItem.Name = "обновитиToolStripMenuItem";
-            this.обновитиToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.обновитиToolStripMenuItem.Text = "Обновити";
-            this.обновитиToolStripMenuItem.Click += new System.EventHandler(this.обновитиToolStripMenuItem_Click);
+            this.ReloadToolStripMenuItem.Name = "ReloadToolStripMenuItem";
+            this.ReloadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ReloadToolStripMenuItem.Text = "Обновити";
+            this.ReloadToolStripMenuItem.Click += new System.EventHandler(this.обновитиToolStripMenuItem_Click);
             // 
             // toolStrip1
             // 
@@ -213,7 +214,7 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(760, 359);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(758, 359);
             this.tableLayoutPanel1.TabIndex = 5;
             // 
             // listView1
@@ -223,21 +224,27 @@
             this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView1.LabelEdit = true;
             this.listView1.LargeImageList = this.imageList2;
-            this.listView1.Location = new System.Drawing.Point(287, 3);
+            this.listView1.Location = new System.Drawing.Point(286, 3);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(470, 353);
+            this.listView1.Size = new System.Drawing.Size(469, 353);
             this.listView1.SmallImageList = this.imageList1;
             this.listView1.TabIndex = 4;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.AfterLabelEdit += new System.Windows.Forms.LabelEditEventHandler(this.listView1_AfterLabelEdit);
             this.listView1.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listView1_ColumnClick);
             this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.listView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listView1_KeyDown);
+            this.listView1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.listView1_KeyUp);
+            this.listView1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseClick);
             this.listView1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseDoubleClick);
+            this.listView1.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.listView1_PreviewKeyDown);
             // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            this.contextMenuStrip1.Opened += new System.EventHandler(this.contextMenuStrip1_BeginDrag);
+            this.contextMenuStrip1.BeginDrag += new System.EventHandler(this.contextMenuStrip1_BeginDrag);
             // 
             // imageList2
             // 
@@ -260,7 +267,7 @@
             this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeView1.Location = new System.Drawing.Point(3, 3);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(278, 353);
+            this.treeView1.Size = new System.Drawing.Size(277, 353);
             this.treeView1.TabIndex = 3;
             this.treeView1.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeView1_BeforeExpand);
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
@@ -297,14 +304,13 @@
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.TreeView treeView1;
         private System.Windows.Forms.ToolStripMenuItem файлToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem видToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem ListIconToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ViewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ListImgToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem TilesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ListToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem TableToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem обновитиToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ReloadToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.ToolStripButton toolStripButton2;
         private System.Windows.Forms.ToolStripTextBox toolStripTextBox1;
@@ -312,6 +318,7 @@
         private System.Windows.Forms.ImageList imageList2;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem ListIconToolStripMenuItem;
     }
 }
 
