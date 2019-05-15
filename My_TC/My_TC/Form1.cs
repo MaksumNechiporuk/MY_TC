@@ -24,6 +24,8 @@ namespace MyTC
         ToolStripMenuItem pasteMenuItem;
         ToolStripMenuItem RenameMenuItem;
         ToolStripMenuItem DeleteMenuItem;
+        ToolStripMenuItem ViewMenuItem;
+
         string oldName;
         public Form1()
         {
@@ -33,8 +35,16 @@ namespace MyTC
             pasteMenuItem = new ToolStripMenuItem("Вставить");
             RenameMenuItem = new ToolStripMenuItem("Переименовать");
             DeleteMenuItem = new ToolStripMenuItem("Удалить");
-            
-            contextMenuStrip1.Items.AddRange(new[] { copyMenuItem, pasteMenuItem, RenameMenuItem , DeleteMenuItem });
+            ViewMenuItem = new ToolStripMenuItem("Вид");
+           ToolStripMenuItem[] ContextMenu = new[] { TableToolStripMenuItem, ListToolStripMenuItem, TilesToolStripMenuItem, ListImgToolStripMenuItem, ListIconToolStripMenuItem };
+           // ViewMenuItem.DropDownItems.AddRange(ContextMenu);
+
+            copyMenuItem.Enabled = false;
+            RenameMenuItem.Enabled = false;
+            DeleteMenuItem.Enabled = false;
+
+
+            contextMenuStrip1.Items.AddRange(new[] { ViewMenuItem,copyMenuItem, pasteMenuItem, RenameMenuItem , DeleteMenuItem });
             copyMenuItem.Click += CopyMenuItem_Click;
             pasteMenuItem.Click += PasteMenuItem_Click;
             RenameMenuItem.Click += RenameMenuItem_Click;
@@ -92,9 +102,22 @@ namespace MyTC
 
         private void DeleteMenuItem_Click(object sender, EventArgs e)
         {
-  DirectoryInfo di = new DirectoryInfo(@listView1.SelectedItems[0].Name);
-            if(DialogResult.Yes==  MessageBox.Show("Удалить "+ listView1.SelectedItems[0].Text,"Удаление",MessageBoxButtons.YesNo))
-            DeleteDirectory(@listView1.SelectedItems[0].Name);
+            DirectoryInfo di = new DirectoryInfo(@listView1.SelectedItems[0].Name);
+            FileAttributes attr = File.GetAttributes(@listView1.SelectedItems[0].Name);
+            string path = currListViewAdress + "\\";
+            if (DialogResult.Yes == MessageBox.Show("Удалить " + listView1.SelectedItems[0].Text + "?", "Удаление", MessageBoxButtons.YesNo))
+
+                if (attr.HasFlag(FileAttributes.Directory))
+            {
+                    DeleteDirectory(@listView1.SelectedItems[0].Name);
+                }
+                else
+            {
+
+                    File.Delete(@listView1.SelectedItems[0].Name);
+            }
+
+
             LoadListView();
 
         }
@@ -123,10 +146,12 @@ namespace MyTC
        
         private void RenameMenuItem_Click(object sender, EventArgs e)
         {
-             oldName = @listView1.SelectedItems[0].Name;
-            listView1.SelectedItems[0].BeginEdit();
-          
-
+            if (listView1.SelectedItems.Count > 0)
+            {
+                oldName = @listView1.SelectedItems[0].Name;
+                listView1.SelectedItems[0].BeginEdit();
+            }
+             
         }
 
         private void PasteMenuItem_Click(object sender, EventArgs e)
@@ -141,14 +166,17 @@ namespace MyTC
             else
                 File.Copy(strCopy, @toolStripTextBox1.Text + "\\" + name);
             LoadListView();
+            pasteMenuItem.Enabled = false;
         }
 
         private void CopyMenuItem_Click(object sender, EventArgs e)
         {
-
-            strCopy =@listView1.SelectedItems[0].Name;
-            pasteMenuItem.Enabled = true;
-           // MessageBox.Show("Copy");
+            if (listView1.SelectedItems.Count > 0)
+            {
+                strCopy = @listView1.SelectedItems[0].Name;
+                pasteMenuItem.Enabled = true;
+            }
+           
         }
 
         private void ClickOnColumn(object sender, ColumnClickEventArgs e)
@@ -700,15 +728,34 @@ namespace MyTC
     
         public void listView1_AfterLabelEdit(object sender, LabelEditEventArgs e)
         {
-            string n = oldName.Substring(oldName.LastIndexOf('.') + 1);
+            FileAttributes attr = File.GetAttributes(@oldName);
             string path = currListViewAdress + "\\";
-            File.Move(@oldName, @path + e.Label.ToString() + '.' + n);
-            LoadListView();
+
+            if (attr.HasFlag(FileAttributes.Directory))
+            {
+                Directory.Move(@oldName, @path + e.Label.ToString());
+            }
+            else
+            {
+                string n = oldName.Substring(oldName.LastIndexOf('.') + 1);
+                File.Move(@oldName, @path + e.Label.ToString() + '.' + n);
+            }
+                LoadListView();
         }
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (listView1.SelectedItems.Count > 0)
+            {
+                RenameMenuItem.Enabled = true;
+                copyMenuItem.Enabled = true;
+                DeleteMenuItem.Enabled = true;
+            }
+            else
+            {
+                copyMenuItem.Enabled = false;
+                RenameMenuItem.Enabled = false;
+                DeleteMenuItem.Enabled = false;
+            }
         }
-
-       
     }
 }
