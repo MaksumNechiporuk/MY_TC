@@ -214,7 +214,7 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(758, 359);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(757, 359);
             this.tableLayoutPanel1.TabIndex = 5;
             // 
             // listView1
@@ -226,18 +226,14 @@
             this.listView1.LargeImageList = this.imageList2;
             this.listView1.Location = new System.Drawing.Point(286, 3);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(469, 353);
+            this.listView1.Size = new System.Drawing.Size(468, 353);
             this.listView1.SmallImageList = this.imageList1;
             this.listView1.TabIndex = 4;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.AfterLabelEdit += new System.Windows.Forms.LabelEditEventHandler(this.listView1_AfterLabelEdit);
-            this.listView1.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listView1_ColumnClick);
             this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
-            this.listView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listView1_KeyDown);
             this.listView1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.listView1_KeyUp);
-            this.listView1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseClick);
             this.listView1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseDoubleClick);
-            this.listView1.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.listView1_PreviewKeyDown);
             // 
             // contextMenuStrip1
             // 
