@@ -299,7 +299,6 @@ namespace MyTC
                     if (listView1.SelectedItems.Count > 0)
                     {
                         File.Copy(strCopy, @listView1.SelectedItems[0].Name + "\\" + name);
-
                     }
                     else
                         File.Copy(strCopy, @toolStripTextBox1.Text + "\\" + name);
@@ -820,7 +819,6 @@ namespace MyTC
                 MessageBox.Show(ex.Message);
             }
         }
-
         private void видToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ViewToolStripMenuItem.DropDownItems.Clear();
@@ -830,17 +828,10 @@ namespace MyTC
             ViewToolStripMenuItem.DropDownItems.Add(ReloadToolStripMenuItem);
 
         }
-
         private void contextMenuStrip1_BeginDrag(object sender, EventArgs e)
-        {
-           
+        {         
             ViewMenuItem.DropDownItems.AddRange(items);
-
         }
-
-   
-
-     
 
         private void listView1_KeyUp(object sender, KeyEventArgs e)
         {
@@ -850,7 +841,6 @@ namespace MyTC
 
             }
         }
-
         void Check(ToolStripMenuItem [] it,int i)
         {
             foreach (var item in it)
