@@ -103,7 +103,7 @@
             // 
             this.ListIconToolStripMenuItem.CheckOnClick = true;
             this.ListIconToolStripMenuItem.Name = "ListIconToolStripMenuItem";
-            this.ListIconToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ListIconToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
             this.ListIconToolStripMenuItem.Text = "Список іконок";
             this.ListIconToolStripMenuItem.Click += new System.EventHandler(this.списокІконокToolStripMenuItem_Click);
             // 
@@ -111,7 +111,7 @@
             // 
             this.ListImgToolStripMenuItem.CheckOnClick = true;
             this.ListImgToolStripMenuItem.Name = "ListImgToolStripMenuItem";
-            this.ListImgToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ListImgToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
             this.ListImgToolStripMenuItem.Text = "Список зображень";
             this.ListImgToolStripMenuItem.Click += new System.EventHandler(this.списокЗображеньToolStripMenuItem_Click);
             // 
@@ -119,7 +119,7 @@
             // 
             this.TilesToolStripMenuItem.CheckOnClick = true;
             this.TilesToolStripMenuItem.Name = "TilesToolStripMenuItem";
-            this.TilesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.TilesToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
             this.TilesToolStripMenuItem.Text = "Плитки";
             this.TilesToolStripMenuItem.Click += new System.EventHandler(this.плиткиToolStripMenuItem_Click);
             // 
@@ -127,7 +127,7 @@
             // 
             this.ListToolStripMenuItem.CheckOnClick = true;
             this.ListToolStripMenuItem.Name = "ListToolStripMenuItem";
-            this.ListToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ListToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
             this.ListToolStripMenuItem.Text = "Список";
             this.ListToolStripMenuItem.Click += new System.EventHandler(this.списокToolStripMenuItem_Click);
             // 
@@ -135,19 +135,19 @@
             // 
             this.TableToolStripMenuItem.CheckOnClick = true;
             this.TableToolStripMenuItem.Name = "TableToolStripMenuItem";
-            this.TableToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.TableToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
             this.TableToolStripMenuItem.Text = "Таблиця";
             this.TableToolStripMenuItem.Click += new System.EventHandler(this.таблицяToolStripMenuItem_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(177, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(175, 6);
             // 
             // ReloadToolStripMenuItem
             // 
             this.ReloadToolStripMenuItem.Name = "ReloadToolStripMenuItem";
-            this.ReloadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ReloadToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
             this.ReloadToolStripMenuItem.Text = "Обновити";
             this.ReloadToolStripMenuItem.Click += new System.EventHandler(this.обновитиToolStripMenuItem_Click);
             // 
@@ -214,7 +214,7 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(757, 359);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(755, 359);
             this.tableLayoutPanel1.TabIndex = 5;
             // 
             // listView1
@@ -224,9 +224,9 @@
             this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView1.LabelEdit = true;
             this.listView1.LargeImageList = this.imageList2;
-            this.listView1.Location = new System.Drawing.Point(286, 3);
+            this.listView1.Location = new System.Drawing.Point(285, 3);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(468, 353);
+            this.listView1.Size = new System.Drawing.Size(467, 353);
             this.listView1.SmallImageList = this.imageList1;
             this.listView1.TabIndex = 4;
             this.listView1.UseCompatibleStateImageBehavior = false;
@@ -263,7 +263,7 @@
             this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeView1.Location = new System.Drawing.Point(3, 3);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(277, 353);
+            this.treeView1.Size = new System.Drawing.Size(276, 353);
             this.treeView1.TabIndex = 3;
             this.treeView1.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeView1_BeforeExpand);
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);

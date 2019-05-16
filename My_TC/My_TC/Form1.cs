@@ -10,6 +10,7 @@ namespace MyTC
     {
 
         List<string> Adresses = new List<string>();
+        public string login, password;
         int k;
         int currIndex = -1;
         string currListViewAdress = "";
@@ -19,7 +20,7 @@ namespace MyTC
         ToolStripMenuItem RenameMenuItem;
         ToolStripMenuItem DeleteMenuItem;
         ToolStripMenuItem ViewMenuItem;
-
+        Form2 f2;
         ToolStripMenuItem СutMenuItem;
         ToolStripMenuItem Creat;
         ToolStripMenuItem[] items;
@@ -29,96 +30,136 @@ namespace MyTC
         public Form1()
         {
             InitializeComponent();
-            cut = false;
-            listView1.ColumnClick += new ColumnClickEventHandler(ClickOnColumn);
-            copyMenuItem = new ToolStripMenuItem("Копировать");
-            pasteMenuItem = new ToolStripMenuItem("Вставить");
-            RenameMenuItem = new ToolStripMenuItem("Переименовать");
-            DeleteMenuItem = new ToolStripMenuItem("Удалить");
-            СutMenuItem = new ToolStripMenuItem("Вырезать");
+            f2 = new Form2(this);
+
+            f2.ShowDialog();
+        }
+        public void Log()
+        {
+            bool log;
+            if (login == "Admin" && password == "Admin")
+            {
+                cut = false;
+                listView1.ColumnClick += new ColumnClickEventHandler(ClickOnColumn);
+                copyMenuItem = new ToolStripMenuItem("Копировать");
+                pasteMenuItem = new ToolStripMenuItem("Вставить");
+                RenameMenuItem = new ToolStripMenuItem("Переименовать");
+                DeleteMenuItem = new ToolStripMenuItem("Удалить");
+                СutMenuItem = new ToolStripMenuItem("Вырезать");
 
 
-            Creat = new ToolStripMenuItem("Создать");
-            ToolStripMenuItem CreateNewFolder=new ToolStripMenuItem("Папку");
+                Creat = new ToolStripMenuItem("Создать");
+                ToolStripMenuItem CreateNewFolder = new ToolStripMenuItem("Папку");
 
-            ToolStripMenuItem CreateNewTxtFile = new ToolStripMenuItem("Текстовый документ");
-            CreateNewTxtFile.Click += CreateNewTxtFile_Click;
-            CreateNewFolder.Click += CreateNewFolder_Click;
-            Creat.DropDownItems.AddRange(new[] { CreateNewFolder, CreateNewTxtFile });
+                ToolStripMenuItem CreateNewTxtFile = new ToolStripMenuItem("Текстовый документ");
+                CreateNewTxtFile.Click += CreateNewTxtFile_Click;
+                CreateNewFolder.Click += CreateNewFolder_Click;
+                Creat.DropDownItems.AddRange(new[] { CreateNewFolder, CreateNewTxtFile });
 
 
 
-            ViewMenuItem = new ToolStripMenuItem("Вид");
+                ViewMenuItem = new ToolStripMenuItem("Вид");
 
-            items = new ToolStripMenuItem[] { TableToolStripMenuItem,
+                items = new ToolStripMenuItem[] { TableToolStripMenuItem,
             ListToolStripMenuItem, TilesToolStripMenuItem, ListImgToolStripMenuItem, ListIconToolStripMenuItem };
 
-            ViewMenuItem.DropDownItems.AddRange(items);
+                ViewMenuItem.DropDownItems.AddRange(items);
 
 
-            copyMenuItem.Enabled = false;
-            RenameMenuItem.Enabled = false;
-            DeleteMenuItem.Enabled = false;
-            СutMenuItem.Enabled = false;
+                copyMenuItem.Enabled = false;
+                RenameMenuItem.Enabled = false;
+                DeleteMenuItem.Enabled = false;
+                СutMenuItem.Enabled = false;
 
 
-            contextMenuStrip1.Items.AddRange(new[] { ViewMenuItem, copyMenuItem, pasteMenuItem, RenameMenuItem, DeleteMenuItem, СutMenuItem,Creat });
-            copyMenuItem.Click += CopyMenuItem_Click;
-            pasteMenuItem.Click += PasteMenuItem_Click;
-            RenameMenuItem.Click += RenameMenuItem_Click;
-            DeleteMenuItem.Click += DeleteMenuItem_Click;
-            СutMenuItem.Click += СutMenuItem_Click;
-            pasteMenuItem.Enabled = false;
-            ColumnHeader c = new ColumnHeader();
-            c.Text = "Имя";
-            c.Width = c.Width + 80;
-            ColumnHeader c2 = new ColumnHeader();
-            c2.Text = "Размер";
-            c2.Width = c2.Width + 60;
-            ColumnHeader c3 = new ColumnHeader();
-            c3.Text = "Тип";
-            c3.Width = c3.Width + 60;
-            ColumnHeader c4 = new ColumnHeader();
-            c4.Text = "Изменен";
-            c4.Width = c4.Width + 60;
-            listView1.Columns.Add(c);
-            listView1.Columns.Add(c2);
-            listView1.Columns.Add(c3);
-            listView1.Columns.Add(c4);
-
-            string[] str = Directory.GetLogicalDrives();
-            int n = 1;
-            foreach (string s in str)
-            {
-                try
-                {
-                    TreeNode tn = new TreeNode();
-                    tn.Name = s;
-                    tn.Text = "Локальный диск " + s;
-                    treeView1.Nodes.Add(tn.Name, tn.Text, 2);
-                    FileInfo f = new FileInfo(@s);
-                    string t = "";
-                    string[] str2 = Directory.GetDirectories(@s);
-                    foreach (string s2 in str2)
-                    {
-                        t = s2.Substring(s2.LastIndexOf('\\') + 1);
-                        treeView1.Nodes[n - 1].Nodes.Add(s2, t, 0);
-                    }
-                }
-                catch { }
-                n++;
+                contextMenuStrip1.Items.AddRange(new[] { ViewMenuItem, copyMenuItem, pasteMenuItem, RenameMenuItem, DeleteMenuItem, СutMenuItem, Creat });
+                copyMenuItem.Click += CopyMenuItem_Click;
+                pasteMenuItem.Click += PasteMenuItem_Click;
+                RenameMenuItem.Click += RenameMenuItem_Click;
+                DeleteMenuItem.Click += DeleteMenuItem_Click;
+                СutMenuItem.Click += СutMenuItem_Click;
+                pasteMenuItem.Enabled = false;
+                log = true;
             }
-            foreach (TreeNode tn in treeView1.Nodes)
+            else if (login == "User" && password == "User")
             {
-                for (int i = 65; i < 91; i++)
+                listView1.ColumnClick += new ColumnClickEventHandler(ClickOnColumn);
+
+                ViewMenuItem = new ToolStripMenuItem("Вид");
+
+                items = new ToolStripMenuItem[] { TableToolStripMenuItem,
+            ListToolStripMenuItem, TilesToolStripMenuItem, ListImgToolStripMenuItem, ListIconToolStripMenuItem };
+
+                ViewMenuItem.DropDownItems.AddRange(items);
+                log = true;
+            }
+            else
+            {
+                log = false;
+                MessageBox.Show("Неверный логин или пароль");
+                 f2 = new Form2(this);
+
+                f2.ShowDialog();
+            }
+            if (log)
+            {
+                using (StreamWriter fs = new StreamWriter("Log.txt",true))
                 {
-                    char sym = Convert.ToChar(i);
-                    if (tn.Name == sym + ":\\")
-                        tn.SelectedImageIndex = 2;
+                   // DateTime date = DateTime.UtcNow();
+                    fs.WriteLine(login+" "+ DateTime.UtcNow.ToString());
+                    fs.Flush();
+                    fs.Close();
+                }
+                ColumnHeader c = new ColumnHeader();
+                c.Text = "Имя";
+                c.Width = c.Width + 80;
+                ColumnHeader c2 = new ColumnHeader();
+                c2.Text = "Размер";
+                c2.Width = c2.Width + 60;
+                ColumnHeader c3 = new ColumnHeader();
+                c3.Text = "Тип";
+                c3.Width = c3.Width + 60;
+                ColumnHeader c4 = new ColumnHeader();
+                c4.Text = "Изменен";
+                c4.Width = c4.Width + 60;
+                listView1.Columns.Add(c);
+                listView1.Columns.Add(c2);
+                listView1.Columns.Add(c3);
+                listView1.Columns.Add(c4);
+
+                string[] str = Directory.GetLogicalDrives();
+                int n = 1;
+                foreach (string s in str)
+                {
+                    try
+                    {
+                        TreeNode tn = new TreeNode();
+                        tn.Name = s;
+                        tn.Text = "Локальный диск " + s;
+                        treeView1.Nodes.Add(tn.Name, tn.Text, 2);
+                        FileInfo f = new FileInfo(@s);
+                        string t = "";
+                        string[] str2 = Directory.GetDirectories(@s);
+                        foreach (string s2 in str2)
+                        {
+                            t = s2.Substring(s2.LastIndexOf('\\') + 1);
+                            treeView1.Nodes[n - 1].Nodes.Add(s2, t, 0);
+                        }
+                    }
+                    catch { }
+                    n++;
+                }
+                foreach (TreeNode tn in treeView1.Nodes)
+                {
+                    for (int i = 65; i < 91; i++)
+                    {
+                        char sym = Convert.ToChar(i);
+                        if (tn.Name == sym + ":\\")
+                            tn.SelectedImageIndex = 2;
+                    }
                 }
             }
         }
-
         private void CreateNewTxtFile_Click(object sender, EventArgs e)
         {
             k = 1;
